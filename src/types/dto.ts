@@ -2,6 +2,12 @@ import { TaskStatus } from './task';
 
 /**
  * Data Transfer Object for creating a new task
+ * 
+ * Fields:
+ * - title: Required, task title (max 200 characters)
+ * - description: Optional, task description (max 1000 characters)
+ * - dueDate: Optional, due date in ISO 8601 format
+ * - status: Optional, defaults to "pending"
  */
 export interface CreateTaskDto {
   title: string;
@@ -12,6 +18,8 @@ export interface CreateTaskDto {
 
 /**
  * Data Transfer Object for updating an existing task
+ * 
+ * All fields are optional for partial updates
  */
 export interface UpdateTaskDto {
   title?: string;
@@ -21,32 +29,31 @@ export interface UpdateTaskDto {
 }
 
 /**
- * Data Transfer Object for partial task updates
+ * Validation result type
+ * Used to communicate validation outcomes
  */
-export interface PartialUpdateTaskDto {
-  title?: string;
-  description?: string;
-  dueDate?: string;
-  status?: string;
+export interface ValidationResult {
+  success: boolean;
+  errors: string[];
 }
 
 /**
- * API Response interface
+ * Generic API response type for standardized responses
  */
-export interface ApiResponse<T> {
+export type APIResponse<T> = {
   success: boolean;
   data?: T;
   error?: string;
   message?: string;
-}
+};
 
 /**
- * Paginated response interface
+ * Paginated response type
  */
-export interface PaginatedResponse<T> {
+export type PaginatedResponse<T> = {
   success: boolean;
   data: T[];
   total: number;
   page?: number;
   limit?: number;
-}
+};
