@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import taskRoutes from './routes/tasks';
+import { errorHandler, notFound } from './middleware/errorHandler';
 
 // Load environment variables
 dotenv.config();
@@ -20,16 +21,11 @@ app.get('/health', (req, res) => {
 // Routes
 app.use('/tasks', taskRoutes);
 
-// 404 handler
-app.use((req, res) => {
-  res.status(404).json({ success: false, error: 'Not Found' });
-});
+// 404 handler for unmatched routes
+app.use(notFound);
 
-// Error handler
-app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
-  console.error('Error:', err);
-  res.status(500).json({ success: false, error: 'Internal Server Error' });
-});
+// Global error handler
+app.use(errorHandler);
 
 // Start server
 app.listen(PORT, () => {
