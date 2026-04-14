@@ -1,7 +1,7 @@
 /**
  * Task status type
  */
-export type TaskStatus = 'pending' | 'in_progress' | 'completed';
+export type TaskStatus = 'pending' | 'in_progress' | 'completed' | 'cancelled';
 
 /**
  * Task entity interface

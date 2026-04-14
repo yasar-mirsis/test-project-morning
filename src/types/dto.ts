@@ -3,10 +3,10 @@ import { TaskStatus } from './task';
 /**
  * Data Transfer Object for creating a new task
  * 
- * Fields:
- * - title: Required, task title (max 200 characters)
- * - description: Optional, task description (max 1000 characters)
- * - dueDate: Optional, due date in ISO 8601 format
+ * Validation Constraints:
+ * - title: Required, max 200 characters
+ * - description: Optional, max 1000 characters
+ * - dueDate: Optional, ISO 8601 format
  * - status: Optional, defaults to "pending"
  */
 export interface CreateTaskDto {
@@ -39,6 +39,13 @@ export interface ValidationResult {
 
 /**
  * Generic API response type for standardized responses
+ * 
+ * Examples:
+ * Success response:
+ *   { success: true, data: { id: 1, title: "Task", ... } }
+ * 
+ * Error response:
+ *   { success: false, error: "Validation failed", message: "Title is required" }
  */
 export type APIResponse<T> = {
   success: boolean;
