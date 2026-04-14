@@ -1,11 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import taskRoutes from './routes/tasks';
 
 // Load environment variables
 dotenv.config();
-
-// Import routes (placeholder - will be implemented)
-// import taskRoutes from './routes/tasks';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,8 +17,8 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// Routes (placeholder)
-// app.use('/api/v1/tasks', taskRoutes);
+// Routes
+app.use('/tasks', taskRoutes);
 
 // 404 handler
 app.use((req, res) => {
